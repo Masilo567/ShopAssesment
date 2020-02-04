@@ -15,8 +15,6 @@ public class ilabApplyAuto {
 
     WebDriver driver = null;
 
-
-
     @Given("^I open chrome browser$")
     public void iOpenFirefoxBrowser()  {
          System.setProperty("webdriver.chrome.driver", "C:\\Users\\Daniel\\Documents\\chromedriver_win32\\chromedriver.exe");
