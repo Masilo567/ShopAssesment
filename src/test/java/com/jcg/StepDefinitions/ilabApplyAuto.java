@@ -5,10 +5,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.Random;
-
+import java.util.concurrent.TimeUnit;
 
 
 public class ilabApplyAuto {
@@ -17,7 +19,7 @@ public class ilabApplyAuto {
 
     @Given("^I open chrome browser$")
     public void iOpenFirefoxBrowser()  {
-         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Daniel\\Documents\\chromedriver_win32\\chromedriver.exe");
+         System.setProperty("webdriver.chrome.driver", "C:\\Users\\TShikwambana\\Documents\\test\\chromedriver.exe");
          driver = new ChromeDriver();
         driver.get(DriverInitializer.getProperty("ilaburl"));
     }
@@ -29,18 +31,26 @@ public class ilabApplyAuto {
 
     @When("^I click on career link$")
     public void iProvideUsernameAsHiAndPasswordAsHi()  {
-        driver.findElement(By.linkText("CAREERS")).click();
+        //driver.findElement(By.xpath("//*[@id=\"popmake-3738\"]/button")).click();
+        //driver.findElement(By.xpath("//*[@id='menu-primary-right-menu-1']/li[5]/a")).click();
+
+        WebElement element=driver.findElement(By.xpath("//*[@id='menu-primary-right-menu-1']/li[5]/a"));
+        JavascriptExecutor ex=(JavascriptExecutor)driver;
+        ex.executeScript("arguments[0].click()", element);
+
+       // driver.findElement(By.linkText("CAREERS")).click();
     }
 
     @When("^I choose South Africa")
     public void iClickOnLoginButton()  {
-        driver.findElement(By.xpath("/html/body/section/div[2]/div/div/div/div[3]/div[2]/div/div/div[3]/div[2]/div/div/div[3]/a")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("/html/body/section/div[2]/div/div/div/div[3]/div[2]/div/div/div[3]/div[2]/div/div/div[4]/a")).click();
 
     }
 
     @Then("^I should choose first job$")
     public void hiShouldBeName() throws Throwable {
-        driver.findElement(By.xpath("/html/body/section/div[2]/div/div/div/div[3]/div[2]/div/div/div/div/div/div[1]/div[1]/div[2]/span[1]/a")).click();
+        driver.findElement(By.xpath("/html/body/section/div[2]/div/div/div/div[3]/div[2]/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/a")).click();
         }
 
 
