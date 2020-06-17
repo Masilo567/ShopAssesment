@@ -72,7 +72,8 @@ public class ilabApplyAuto{
         for (int i = 1; i <= 10; i++) numbers[i - 1] = (int) (range * aRandom.nextDouble());
         driver.findElement(By.id("phone")).sendKeys(0 + "" + numbers[1] + "" + numbers[2] + " " + numbers[3] + numbers[4] + numbers[5] + " " + numbers[6] + numbers[7] + numbers[8] + numbers[9]);
         driver.findElement(By.id("wpjb_submit")).click();
-        Assert.assertEquals(DriverInitializer.getProperty("expected"), driver.findElement(By.className("wpjb-errors")).getText());
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        Assert.assertEquals(DriverInitializer.getProperty("expected"), driver.findElement(By.xpath("//*[@id=\"wpjb-apply-form\"]/fieldset[1]/div[5]/div/ul/li")).getText());
       //  driver.close();
     }
 
