@@ -29,7 +29,7 @@ public class ilabApplyAuto{
        driver.manage().window().maximize();
     }
 
-    @When("^I click on career link$")
+    @When("^I click on link$")
     public void iProvideUsernameAsHiAndPasswordAsHi()  {
 
        driver.findElement(By.xpath("//*[@id='menu-item-1373']/a")).click();
@@ -42,7 +42,7 @@ public class ilabApplyAuto{
 
     }
 
-    @Then("^I should choose first job$")
+    @Then("^I should choose first option$")
     public void hiShouldBeName() throws Throwable {
         driver.findElement(By.xpath("/html/body/section/div[2]/div/div/div/div[3]/div[2]/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/a")).click();
         }
