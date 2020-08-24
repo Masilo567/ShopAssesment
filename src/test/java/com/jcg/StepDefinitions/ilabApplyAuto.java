@@ -19,7 +19,7 @@ public class ilabApplyAuto{
 
     @Given("^I open chrome browser$")
     public void iOpenFirefoxBrowser()  {
-         System.setProperty("webdriver.chrome.driver", "C:\\Users\\TShikwambana\\Documents\\test\\chromedriver.exe");
+         System.setProperty("webdriver.chrome.driver", "C:\\Users\\TShikwambana\\Documents\\test\\driver2\\chromedriver.exe");
          driver = new ChromeDriver();
         driver.get(DriverInitializer.getProperty("ilaburl"));
     }
@@ -31,14 +31,8 @@ public class ilabApplyAuto{
 
     @When("^I click on career link$")
     public void iProvideUsernameAsHiAndPasswordAsHi()  {
-        //driver.findElement(By.xpath("//*[@id=\"popmake-3738\"]/button")).click();
-        //driver.findElement(By.xpath("//*[@id='menu-primary-right-menu-1']/li[5]/a")).click();
 
-        WebElement element=driver.findElement(By.xpath("//*[@id='menu-primary-right-menu-1']/li[5]/a"));
-        JavascriptExecutor ex=(JavascriptExecutor)driver;
-        ex.executeScript("arguments[0].click()", element);
-
-       // driver.findElement(By.linkText("CAREERS")).click();
+       driver.findElement(By.xpath("//*[@id='menu-item-1373']/a")).click();
     }
 
     @When("^I choose South Africa")
