@@ -13,32 +13,32 @@ import org.openqa.selenium.Keys;
 import java.util.concurrent.TimeUnit;
 
 
-public class ilabApplyAuto{
+public class searchProduct {
 
     WebDriver driver = null;
 
     @Given("^I open chrome browser$")
-    public void iOpenFirefoxBrowser()  {
+    public void iOpenBrowser()  {
          System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
          driver = new ChromeDriver();
-        driver.get(DriverInitializer.getProperty("ilaburl"));
+        driver.get(DriverInitializer.getProperty("shopurl"));
     }
 
     @When("^I maximize browser$")
-    public void iNavigateToLoginHtmlPage()  {
+    public void iNavigateToShopritePage()  {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
        driver.manage().window().maximize();
     }
 
     @When("^I click search product$")
-    public void iProvideUsernameAsHiAndPasswordAsHi()  {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    public void iSearchProduct()  {
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+       driver.findElement(By.id("js-site-search-input")).sendKeys(DriverInitializer.getProperty("prodToSearch")+Keys.ENTER);
 
-       driver.findElement(By.id("js-site-search-input")).sendKeys("Cenplast Plastic Juice Bottle 350ml"+Keys.ENTER);
-       // driver.findElement(By.id("js-site-search-input")).sendKeys("trevor");
     }
 
    @When("^I click on product$")
-    public void iClickOnLoginButton()  {
+    public void iClickOnProductButton()  {
        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
        driver.findElement(By.xpath("//img[contains(@title,'Cenplast Plastic Juice Bottle 350ml')]")).click();
 
@@ -46,15 +46,30 @@ public class ilabApplyAuto{
   }
 
   @Then("^I verify product$")
- public void hiShouldBeName()  {
-    //  driver.findElement(By.xpath("/html/body/googletagmanager:iframe/main/div[4]/div[2]/div/div[2]/div[1]/div[1]/div/span")).click();
+ public void VerifyProduct()  {
+
+      WebElement admi = driver.findElement(By.xpath("//span[contains(@class,'now')]  [contains(text(),' R8')]"));
+      admi.getText();
+      System.out.print(driver.findElement(By.xpath("//span[contains(text(),'R8')]")).getText().toString());
+      Assert.assertEquals(DriverInitializer.getProperty("price"), driver.findElement(By.xpath("//span[contains(text(),'R8')]")).getText().toString());
+      //System.out.print(driver.findElement(By.xpath("//sup[contains(text(),'.99')]")).getText().toString());
       JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript("window.scrollBy(0,350)", "");
 
-    //  Assert.assertEquals("R8", driver.findElement(By.xpath("/html/body/googletagmanager:iframe/main/div[4]/div[2]/div/div[2]/div[1]/div[2]/h1")).getText());
+
 
       }
 
+    @Then("^I verify product information$")
+    public void productInfo()  {
+
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//*[@id=\"accessibletabsnavigation0-1\"]/a")).click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        Assert.assertEquals("Cenplast", driver.findElement(By.xpath("//td[contains(text(),'Cenplast')]")).getText());
+
+
+    }
 
 
 }
